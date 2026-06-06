@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flickbase</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/2736d828cc.js" crossorigin="anonymous"></script>
+    <script src="index.js" defer></script>
+</head>
+<body>
+    <section class="header">
+        <div class="header__container">
+            <div class="logo__wrapper">
+                <img class="logo" src="/assets/logo.png" alt="">
+            </div>
+            <div class="header__title--wrapper">
+                <h1 class="header__title">Flickbase</h1>
+                <h3 class="header__sub-title">America's favorite movie database</h3>
+            </div>
+            <div class="contact__wrapper">
+                <button class="contact__btn">Contact Us</button>
+            </div>
+        </div>
+    </section>
+    <section id="search">
+        <div class="search__container">
+            <div class="search__title">
+                <h1>Search for all your favorite movies in one place!</h1>
+            </div>
+            <div class="search__bar--wrapper">
+                <input type="text" id="search-bar" class="search__bar" placeholder="Search by title">
+                <button class="search__submit">
+                    <i class="fa-solid fa-magnifying-glass" id="search-input" on click="startSearch(event)"></i>
+                </button>
+            </div>
+        </div>
+        <div class="loading_state">
+            <i class="fa-solid fa-spinner"></i>
+        </div>
+        <div class="results__container">
+            <div class="results__header">
+                <div class="results__para">
+                    Search Results:
+                </div>
+                <select name="" id="filter">
+                    <option value disabled selected>Sort</option>
+                    <option value="A to Z">Title, A to Z</option>
+                    <option value="Z to A">Title, Z to A</option>
+                </select>
+            </div>
+            <div class="movies">
+                <div class="movie">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="footer__logo--wrapper">
+                    <img class="logo" src="/assets/logo.png" alt="">
+                </div>
+                <div class="footer__links">
+                    <a href="#" class="footer__link">About</a>
+                    <a href="#" class="footer__link">Contact</a>
+                    <a href="#" class="footer__link">Terms</a>
+                </div>
+                <div class="footer__copyright">
+                    Copyright © 2026
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
