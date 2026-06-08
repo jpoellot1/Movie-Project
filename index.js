@@ -1,76 +1,95 @@
 // http://www.omdbapi.com/?apikey=c3dc2346&
 // http://img.omdbapi.com/?apikey=c3dc2346&
 
-// const searchBar = document.getElementById('search-bar')
-// const movies = document.getElementsByClassName('movie')
+// let currentMovies = []
 
-// async function fetchSearchResults(query) {
-//     if (!query) {
-//         movies.innerHTML = ''
-//         return
-//     }
-    
-//     try{
-//         const promise = await fetch(`http://www.omdbapi.com/?apikey=c3dc2346&s={endcodeURIComponent(query)}`)
+    async function getMovies(searchQuery) {
+            try{
+                const response = await fetch (`http://www.omdbapi.com/?apikey=c3dc2346&s=${searchQuery}`)
+                const result = await response.json()
+                console.log(result)
+                return result.Search || []
+            } catch (error) {
+                console.error('Error fetching data:', error)
+                return []
+            }
+    }
 
-//         const result = await fetch(promise)
+    async function searchResults(searchQuery) {
+        const moviesWrapper = document.querySelector('.movies')
+        moviesWrapper.classList += ' .loading__state--visible'
+        
+        const movies = await getMovies(searchQuery)
+        console.log("movies received in UI", movies)    
+        
+        if (!Array.isArray(movies) || movies.length === 0) {
+            moviesWrapper.innerHTML = '<p>No Movies Found</p>'
+            moviesWrapper.classList.remove('loading__state--visible');
+            return;
+        }
 
-//         if (!result.ok) {
-//             throw new Error('Network response was not OK')
-//         }
-
-//         const data = await result.json()
-
-//         displayResults(data.results)
-//     }
-//     catch (error) {
-//         console.error('Error fetching data:', error)
-//         movies.innerHTML = '<p>Error loading results</p>'
-//     }
-// }
-
-async function getMovies() {
-    const moviesResult= await fetch ("http://www.omdbapi.com/?apikey=c3dc2346&s=Fast")
-    const result = await moviesResult.json()
-    console.log(result)
-    return result.Search
-}
-
-async function searchResults(search) {
-    const moviesWrapper = document.querySelector('.movies')
-    
-    const movies = await getMovies()
-
-    const movieHtml = movies
+        const movieHtml = movies
+            .slice(0,6)
             .map((movie) => {
-        return `<div class="movie">
-        <img class="movie__poster" src="${movie.Poster}"    
-            alt="">
-        <h3 class="movie__title">
-            ${movie.Title}
-        </h3>
-        <p class="movie__year">
-            ${movie.Year}
-        </p>
-    </div>`
-    }).slice(0,6)
-    .join("")
-    moviesWrapper.innerHTML = movieHtml
-}
+                return `<div class="movie">
+                <img class="movie__poster" src="${movie.Poster}">
+                <h3 class="movie__title">${movie.Title}</h3>
+                <p class="movie__year">${movie.Year}</p>
+            </div>`
+        })
+        .join("")
+        moviesWrapper.innerHTML = movieHtml
 
-setTimeout(() => {
-    searchResults()
-})
+        moviesWrapper.classList.remove('loading__state--visible')
+    }
+
+    // async function renderMovies(moviesList) {
+    //     const moviesWrapper = document.querySelector('.movies')    
+
+    //     if (!Array.isArray(moviesList) || moviesList.length === 0) {
+    //         moviesWrapper.innerHTML = '<p>No Movies Found</p>'
+    //         return;
+    //     }
+
+    //     const movieHtml = moviesList
+    //         .slice(0,6)
+    //         .map((movie) => {
+    //             return `<div class="movie">
+    //             <img class="movie__poster" src="${movie.Poster}">
+    //             <h3 class="movie__title">${movie.Title}</h3>
+    //             <p class="movie__year">${movie.Year}</p>
+    //         </div>`
+    //     })
+    //     .join("")
+    //     moviesWrapper.innerHTML = movieHtml
+    // }
+
+    // function handleSort() {
+    //     const sortValue = document.getElementById('filter')
+
+    //     let sortedMovies = [...currentMovies]
+
+    //     if (sortValue === 'A_to_Z') {
+    //         sortedMovies.sort((a, b) =>
+    //         a.Title.localCompare(b.title))
+    //     }
+    //     else if (sortValue === 'Z_to_A') {
+    //         sortedMovies.sort((a, b) =>
+    //         b.Title.localCompare(a.title))
+    //     }
+    //     renderMovies(sortedMovies)
+    // }
+
+    function filterMovies(event) {
+        searchResults(event.target.value)
+    }
 
 
+    document.getElementById('search-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const searchQuery = document.getElementById('search-input').value
 
-// const search = document.getElementById('search-input')
-// search.addEventListener('click', startSearch(event))
-
-// async function startSearch(event) {
-//     const userInputValue = document.getElementById('search-bar').value
-//     const urlBase = 'http://www.omdbapi.com/?apikey=c3dc2346&s='
-//     if (userInputValue === null || userInputValue === ''){
-//         return}
-//     const searchUrl = urlBase + userInputValue
-// }
+            if (searchQuery.trim()) {
+                await searchResults(searchQuery)
+            }
+    })

@@ -96,7 +96,7 @@ body {
     width: 100%;
 }
 
-.search__bar--wrapper {
+#search-form {
     margin: 16px 0;
     display: flex;
     justify-content: center;
@@ -125,20 +125,45 @@ body {
     color:rgb(250, 182, 11);
 }
 
-.loading_state {
-    font-size: 56px;
-    color:rgb(250, 182, 11)
+.loading__state {
+    font-size: 80px;
+    color:rgb(250, 182, 11);
+    margin: 16px 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    display: none;
+}
+
+.loading__state--visible {
+    display: block !important;
+}
+
+.fa-spinner {
+    animation: spinner 750ms infinite linear;
+}
+
+@keyframes spinner{
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg)
+    }
 }
 
 .results__container{
     margin: 20px 0;
     width: 100%;
+    position: relative;
 }
 
 .results__header {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    margin: 16px 0;
 }
 
 .results__para {
@@ -160,8 +185,17 @@ select {
 
 .movies {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.movie {
+    width: calc(100%/3);
+}
+
+.movie__poster {
+    height: 450px;
+    width: 300px;  
 }
 
 .movie__title {

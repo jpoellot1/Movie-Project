@@ -28,31 +28,30 @@
             <div class="search__title">
                 <h1>Search for all your favorite movies in one place!</h1>
             </div>
-            <div class="search__bar--wrapper">
-                <input type="text" id="search-bar" class="search__bar" placeholder="Search by title">
-                <button class="search__submit">
-                    <i class="fa-solid fa-magnifying-glass" id="search-input" on click="startSearch(event)"></i>
+            <form id="search-form">
+                <input type="text" id="search-input" class="search__bar" placeholder="Search by title">
+                <button type="submit" class="search__submit">
+                    <i class="fa-solid fa-magnifying-glass" id="search-submit"></i>
                 </button>
-            </div>
-        </div>
-        <div class="loading_state">
-            <i class="fa-solid fa-spinner"></i>
+            </form>
         </div>
         <div class="results__container">
             <div class="results__header">
                 <div class="results__para">
                     Search Results:
                 </div>
-                <select name="" id="filter">
+                <select id="filter" onchange="filterMovies(event)">
                     <option value disabled selected>Sort</option>
-                    <option value="A to Z">Title, A to Z</option>
-                    <option value="Z to A">Title, Z to A</option>
+                    <option value="A_to_Z">Title, A to Z</option>
+                    <option value="Z_to_A">Title, Z to A</option>
                 </select>
             </div>
-            <div class="movies">
-                <div class="movie">
-                    
+            <div class="movies__container">
+                <div class="movies">
                 </div>
+            </div>
+            <div class="loading__state">
+                <i class="fa-solid fa-spinner"></i>
             </div>
         </div>
     </section>
