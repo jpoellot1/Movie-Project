@@ -40,19 +40,15 @@
                 <div class="results__para">
                     Search Results:
                 </div>
-                <select id="filter" onchange="filterMovies(event)">
+                <select id="sort-select" onchange="handleSort()">
                     <option value disabled selected>Sort</option>
                     <option value="A_to_Z">Title, A to Z</option>
                     <option value="Z_to_A">Title, Z to A</option>
                 </select>
             </div>
-            <div class="movies__container">
-                <div class="movies">
-                </div>
-            </div>
-            <div class="loading__state">
-                <i class="fa-solid fa-spinner"></i>
-            </div>
+            <div class="movies">
+                    <i class="fa-solid fa-spinner loading__state--spinner"></i>  
+            </div>          
         </div>
     </section>
     <footer>
