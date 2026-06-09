@@ -1,6 +1,3 @@
-// http://www.omdbapi.com/?apikey=c3dc2346&
-// http://img.omdbapi.com/?apikey=c3dc2346&
-
 async function getMovies(searchQuery) { 
     try{
         const response = await fetch (`https://www.omdbapi.com/?apikey=c3dc2346&s=${searchQuery}`)
@@ -36,6 +33,8 @@ async function searchResults(searchQuery) {
     else if (sortValue === 'Z_to_A') {
         originalSixMovies.sort((a,b) => b.Title.localeCompare(a.Title))
     }
+
+    document.getElementById('sort-select').value = "";
 
     const movieHtml = originalSixMovies
         .map((movie) => {
