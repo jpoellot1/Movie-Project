@@ -3,7 +3,7 @@
 
 async function getMovies(searchQuery) { 
     try{
-        const response = await fetch (`http://www.omdbapi.com/?apikey=c3dc2346&s=${searchQuery}`)
+        const response = await fetch (`https://www.omdbapi.com/?apikey=c3dc2346&s=${searchQuery}`)
         const result = await response.json()
         console.log(result)
         return result.Search || []
